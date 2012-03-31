@@ -1,0 +1,356 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>S i l v e r  B u l l e t</title>
+
+		<link rel="shortcut icon" href="../favicon.ico" />
+
+		
+		<!-- CSS concatenated and minified via ant build script-->
+		<link rel="stylesheet" type="text/css" href="../Style/silverbullet.css">
+		<link rel="stylesheet" type="text/css" href="../Style/tofslaforms.css">
+		<link rel="stylesheet" type="text/css" href="../Style/messagebar.css">
+		<link rel="stylesheet" type="text/css" href="../Style/qtip.css">
+		<!-- end CSS-->
+
+		<!-- scripts concatenated and minified via ant build script-->
+		<script type="text/javascript" src="../Lib/jQuery/jquery.js"></script>
+		<script type="text/javascript" src="../Lib/jQuery/jquery-ui.js"></script>
+		<script type="text/javascript" src="../Lib/jQuery/TofslaForms/jquery.tofslaforms.js"></script>
+		<script type="text/javascript" src="../Lib/jQuery/VTicker/jquery.vticker.js"></script>
+		<script type="text/javascript" src="../Lib/jQuery/MessageBar/jquery.messagebar.js"></script>
+		<script type="text/javascript" src="../Lib/jQuery/SimpleWeather/jquery.simpleweather.js"></script>
+		<script type="text/javascript" src="../Lib/jQuery/Base64/jquery.base64.js"></script>
+		<script type="text/javascript" src="../Lib/jQuery/qtip/jquery.qtip.js"></script>
+		<script type="text/javascript" src="http://www.geoplugin.net/javascript.gp"></script>
+		<!-- end scripts-->
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				document.getElementById("txtUserName").focus();
+				
+				$("#btnLogin").click(function(){
+					//$(".containerLoading").fadeIn("slow");
+					$(".containerTableLogin").fadeOut(1000);
+					$(".containerUserInfo").fadeIn(2000);
+					//$(".containerTableLogin").hide("fade",{direction:"right"},500);
+					//$(".containerUserInfo").show("slide",{direction:"right"},1000);
+				});
+				$("#btnLogout").click(function(){
+					//$(".containerLoading").fadeOut("slow");
+					$(".containerUserInfo").fadeOut(1000);
+					$(".containerTableLogin").fadeIn(2000);
+					//$(".containerUserInfo").hide("fade",{direction:"right"},500);
+					//$(".containerTableLogin").show("slide",{direction:"right"},1000);
+				});
+				
+				$(".containerTicker").vTicker({
+					speed: 1200,
+					pause: 3000,
+					showItems: 1,
+					animation: 'fade',
+					mousePause: false,
+					height: 0,
+					direction: 'up'
+				});
+
+				$.simpleWeather({
+						location: geoplugin_city() + ', ' + geoplugin_countryName(),
+						unit: 'c',
+						success: function(weather) {
+							html = '<div class="weatherImage"><img src="'+weather.image+'"></div>';
+							html += '<div class="weatherLocation">';
+							if(geoplugin_countryName() != ""){
+								html += '<img src="../Images/FlagImages/' + geoplugin_countryCode() + '.png" />';
+								if (geoplugin_city() != "")
+								{
+									html += geoplugin_city()+', ';
+								}
+								html += geoplugin_countryName();
+							};
+							html += '</div>';
+							html += '<div class="weatherTemperature">'+weather.temp+'&deg;'+weather.units.temp+'</div>';
+							html += '<div class="weatherConditions">'+weather.currently+'</div>';
+							$(".containerWeatherFeed").html(html);
+						},
+						error: function(error) {
+								$(".containerWeatherFeed").html("<p>"+error+"</p>");
+						}
+				});
+
+				$("#msg").click(function(event){
+					event.preventDefault();
+					$(".messageBar").displayMessage({
+						message: "Error message",
+						background: "transparent",
+						color: "#ffffff",
+						speedOpen: "fast",
+						speedClose: "slow",
+						skin: "ff",
+						position: "absolute",
+						autohide: true,
+						hideTime: 5000,
+						type: "Info"
+					});
+				});	
+
+				$.ajax({
+					type: "GET",
+					url: "useragent.asp?userAgent=" + String($.base64Encode(navigator.userAgent)),
+					success: function(data){
+						var sUserAgent = data.split("|");
+						$(".containerUserIPInfo").html("<table><tr><td><img src='" + sUserAgent[13] + "' /></td><td><b>" + sUserAgent[9] + "</b></td></tr><tr><td><img src='" + sUserAgent[7] + "' /></td><td><b>" + sUserAgent[3] + "</b></td></tr></table>");
+					},
+					error: function(){
+						alert("ERR");
+					}
+				});
+				
+				$(".containerUserAvatar").hover(function(){
+					$(".containerUserIPInfo").fadeToggle(1500);
+				});
+				
+				$(".clickHereButton").delay(30000).fadeOut(2000);
+				
+				$("#logoMainMenu").mouseenter(function(){
+					$(".clickHereButton").remove();
+					$("#logoMainMenu").addClass("logoMainMenuActive");
+					$(".containerMainMenu").animate({height:"240px",width:"100%"},700);
+				});
+				$(".containerMainMenu").mouseleave(function(){
+					$("#logoMainMenu").removeClass("logoMainMenuActive");
+					$(".containerMainMenu").animate({height:"32px",width:"200px"},700);					
+				});
+				
+				$("input[title]").qtip({
+					style:{
+						classes: "ui-tooltip-light ui-tooltip-rounded ui-tooltip-shadow ui-tooltip-jtools"
+					},
+					show:{
+						event: "focus",
+						effect: function(offset){
+							 $(this).show("fade",{direction:"left"},1000);;
+						}
+					},
+					hide:{
+						event: "blur",
+						effect: function(offset){
+							 $(this).hide("fade",{direction:"left"},700);;
+						}
+					},
+					position:{
+						my: "middle left",
+						at: "middle right",
+						adjust:{
+							x: 7
+						}
+					}
+				});
+				
+				$(".tdButton, .tdButton2").qtip({
+					style:{
+						classes: "ui-tooltip-light ui-tooltip-rounded ui-tooltip-shadow ui-tooltip-jtools"
+					},
+					show:{
+						event: "mouseover",
+						effect: function(offset){
+							 $(this).show("fade",{direction:"left"},1000);
+						}
+					},
+					hide:{
+						event: "mouseleave",
+						effect: function(offset){
+							 $(this).hide("fade",{direction:"left"},700);
+						}
+					},
+					position:{
+						my: "bottom right",
+						at: "top left"
+					}
+				});
+				
+				$(".menuItem").hover(function(){
+					$(this).find(".menuItemOverlay").fadeOut(1100);
+					$(this).addClass("menuItemHover")
+				},function(){
+					$(this).find(".menuItemOverlay").fadeIn(800);
+					$(this).removeClass("menuItemHover");
+				});				
+				
+			});
+		</script>
+	</head>
+	
+	<body class="bodyMain">
+		<div class="containerHeader rounded">
+			<div class="rivetTopLeft"></div><div class="rivetTopRight"></div><div class="rivetBottomLeft"></div><div class="rivetBottomRight"></div>
+			<div id="messagerHeader" class="messageBar"></div>
+			<div class="logoMain">agile management system</div>
+			<div class="containerVersion">release 1.0.0</div>
+			<div class="containerUserInfo">
+				<div class="containerUserAvatar rounded"><img src="../Images/AvatarImages/AvatarDefault.png" class="rounded"/></div>
+				<div class="containerTableUserInfo">
+					<div class="containerUserIPInfo rounded"></div>
+					<table class="tableUserInfo" cellpadding="0">
+						<tr>
+							<td class="tdUserName">Cas du Plessis</td>
+							<td class="tdButton2" style="background: transparent url('../Images/ButtonImages/ButtonMyAccount.png') no-repeat 100%;"><a href="#">manage my Silver Bullet account</a></td>
+						</tr>
+						<tr>
+							<td class="tdUserPosition">SCRUM Master</td>
+							<td class="tdButton2" style="background: transparent url('../Images/ButtonImages/ButtonChangePassword.png') no-repeat 100%;"><a href="#">change my Silver Bullet password</a></td>
+						</tr>
+						<tr>
+							<td><div class="containerWeatherFeed"></div></td>
+							<td id="btnLogout" class="tdButton2" style="background: transparent url('../Images/ButtonImages/ButtonLogout.png') no-repeat 100%;"><a href="#">log me out from Silver Bullet</a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="containerTableLogin">
+				<table class="tableLogin">
+					<tr>
+						<td class="tdLoginLabel">user name / email:</td>
+						<td><input id="txtUserName" type="text" class="textLogin" title="your Silver Bullet user name"/></td>
+						<td rowspan="2" style="height:40px;width:70px;"><div class="clickHereButton" style="top:5px;"><img id="imgDoThis" src="../Images/MiscImages/ArrowLeft4.gif" /></div></td>
+						<td id="btnRegister" class="tdButton2" style="background: transparent url('../Images/ButtonImages/ButtonAdd.png') no-repeat 100%;" title="register a new Silver Bullet account"><a href="#">register a new Silver Bullet account</a></td>
+					</tr>
+					<tr>
+						<td class="tdLoginLabel">password:</td>
+						<td><input id="txtPassword" type="password" class="textLogin" title="your Silver Bullet password" /></td>
+						<td class="tdButton2" style="background: transparent url('../Images/ButtonImages/ButtonForgot.png') no-repeat 100%;"><a href="test.asp">i forgot my Silver Bullet password</a></td>
+					</tr>
+					<tr>
+						<td id="btnLogin" colspan="2" class="tdButton" style="background: transparent url('../Images/ButtonImages/ButtonLogin.png') no-repeat 100%;"><a href="#">log me into Silver Bullet</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="containerContent rounded">
+			<div class="rivetTopLeft"></div><div class="rivetTopRight"></div><div class="rivetBottomLeft"></div><div class="rivetBottomRight"></div>
+			<div class="containerLoading">
+				<div class="progressLoading"><div>logging onto Silver Bullet</div></div>
+			</div>
+			<div class="containerWelcome">
+				<img src="../Images/LogoImages/LogoSilverBulletMedium.png" />
+				<div class="containerMotto">helping you do Agile ... the way it was intended ...</div>
+				<div class="containerTicker">
+					<ul class="listTicker">
+						<li>"<b>individuals and interactions</b> over processes and tools"</li>
+						<li>"<b>working software</b> over comprehensive documentation"</li>
+						<li>"<b>customer collaboration</b> over contract negotiation"</li>
+						<li>"<b>responding to change</b> over following a plan"</li>
+					</ul>
+				</div>
+			</div>
+			<div class="clickHereButton" style="top:-15px;left:130px;"><img id="imgDoThis" src="../Images/MiscImages/ArrowLeft3.gif" /></div>
+			<div class="containerMainMenu">
+				<div id="logoMainMenu" class="logoMainMenu"><span>menu</span><img src="../Images/LogoImages/LogoSilverBulletMenu.png" /></div>
+				<div id="contentMainMenu" class="contentMainMenu">		
+					<div class="menuItem rounded">
+						<div class="menuItemOverlay rounded">
+							<div class="menuItemIcon"><img src="../Images/MenuImages/settings3.png" /></div>
+							<p class="menuItemTitle">My Silver Bullet</p>
+						</div>
+						<div class="menuItemContent rounded">
+							<p class="menuItemTitle">My Silver Bullet</p>
+							<div class="menuItemDescription">Overview of my tasks, activities and stats.</div>
+							<div class="menuItemButtonbar">
+								<img src="../Images/MenuImages/IconSearch.png" />
+								<img src="../Images/MenuImages/IconReports.png" />
+								<img src="../Images/MenuImages/IconSettings.png" />
+								<img src="../Images/MenuImages/IconHelp.png" />
+							</div>
+						</div>					
+					</div>
+					<div class="menuSeperator"><img src="../Images/MenuImages/seperator.png" /></div>
+					<div class="menuItem rounded">
+						<div class="menuItemOverlay rounded">
+							<div class="menuItemIcon"><img src="../Images/MenuImages/releases3.png" /></div>
+							<p class="menuItemTitle">Product Backlog</p>
+						</div>
+						<div class="menuItemContent rounded">
+							<p class="menuItemTitle">Product Backlog</p>
+							<div class="menuItemDescription">Defining user stories, and assigning priorities.</div>
+							<div class="menuItemButtonbar">
+								<img src="../Images/MenuImages/IconSearch.png" />
+								<img src="../Images/MenuImages/IconReports.png" />
+								<img src="../Images/MenuImages/IconSettings.png" />
+								<img src="../Images/MenuImages/IconHelp.png" />
+							</div>
+						</div>					
+					</div>
+					<div class="menuNext"><img src="../Images/MenuImages/next.gif" /></div>
+					<div class="menuItem rounded">
+						<div class="menuItemOverlay rounded">
+							<div class="menuItemIcon"><img src="../Images/MenuImages/settings.png" /></div>
+							<p class="menuItemTitle">Release Planning</p>
+						</div>
+						<div class="menuItemContent rounded">
+							<p class="menuItemTitle">Release Planning</p>
+							<div class="menuItemDescription">Schedule and plan releases.</div>
+							<div class="menuItemButtonbar">
+								<img src="../Images/MenuImages/IconSearch.png" />
+								<img src="../Images/MenuImages/IconReports.png" />
+								<img src="../Images/MenuImages/IconSettings.png" />
+								<img src="../Images/MenuImages/IconHelp.png" />
+							</div>
+						</div>					
+					</div>
+					<div class="menuNext"><img src="../Images/MenuImages/next.gif" /></div>
+					<div class="menuItem rounded">
+						<div class="menuItemOverlay rounded">
+							<div class="menuItemIcon"><img src="../Images/MenuImages/settings.png" /></div>
+							<p class="menuItemTitle">Sprints</p>
+						</div>
+						<div class="menuItemContent rounded">
+							<p class="menuItemTitle">Sprints</p>
+							<div class="menuItemDescription">Updating tasks, burndowns charts and timesheets.</div>
+							<div class="menuItemButtonbar">
+								<img src="../Images/MenuImages/IconSearch.png" />
+								<img src="../Images/MenuImages/IconReports.png" />
+								<img src="../Images/MenuImages/IconSettings.png" />
+								<img src="../Images/MenuImages/IconHelp.png" />
+							</div>
+						</div>					
+					</div>
+					<div class="menuSeperator"><img src="../Images/MenuImages/seperator.png" /></div>
+					<div class="menuItem rounded">
+						<div class="menuItemOverlay rounded">
+							<div class="menuItemIcon"><img src="../Images/MenuImages/settings.png" /></div>
+							<p class="menuItemTitle">Reports</p>
+						</div>
+						<div class="menuItemContent rounded">
+							<p class="menuItemTitle">Reports</p>
+							<div class="menuItemDescription">Reports, graphs and charts.</div>
+							<div class="menuItemButtonbar">
+								<img src="../Images/MenuImages/IconSearch.png" />
+								<img src="../Images/MenuImages/IconReports.png" />
+								<img src="../Images/MenuImages/IconSettings.png" />
+								<img src="../Images/MenuImages/IconHelp.png" />
+							</div>
+						</div>					
+					</div>
+					<div class="menuSeperator"><img src="../Images/MenuImages/seperator.png" /></div>
+					<div class="menuItem rounded">
+						<div class="menuItemOverlay rounded">
+							<div class="menuItemIcon"><img src="../Images/MenuImages/settings.png" /></div>
+							<p class="menuItemTitle">System Config</p>
+						</div>
+						<div class="menuItemContent rounded">
+							<p class="menuItemTitle">System Config</p>
+							<div class="menuItemDescription">Configure Silver Bullet system settings.</div>
+							<div class="menuItemButtonbar">
+								<img src="../Images/MenuImages/IconSearch.png" />
+								<img src="../Images/MenuImages/IconReports.png" />
+								<img src="../Images/MenuImages/IconSettings.png" />
+								<img src="../Images/MenuImages/IconHelp.png" />
+							</div>
+						</div>					
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
