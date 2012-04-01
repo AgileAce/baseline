@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>S i l v e r  B u l l e t</title>
+
+		<!-- CSS concatenated and minified via ant build script-->
+		<link rel="stylesheet" type="text/css" href="../Style/SilverBullet.css">
+		<!-- end CSS-->
+		<link rel="stylesheet" type="text/css" href="../Style/tofslaforms.css">
+
+		<script type="text/javascript" src="../Lib/jQuery/jquery.js"></script>
+		<script type="text/javascript" src="../Lib/jQuery/jquery-ui.js"></script>
+		<script type="text/javascript" src="../Lib/jQuery/TofslaForms/tofslaforms.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+				document.getElementById("txtUserName").focus();
+				
+				$("#btnLogin").click(function(){
+					$(".containerLoading").fadeIn("slow");
+				});
+				
+				$(".containerLoading").click(function(){
+					$("#divLogin").find("table").fadeOut("medium");
+					$("#divLogin").find("div").fadeOut("medium");
+					$("#divLogin").effect("size",{to:{width:0,height:0},origin:["middle","center"],scale:"content"},1000).fadeOut("slow");
+					$(".bodyLogin").fadeOut("slow");
+					window.location.replace("../Old/index.html");
+				})
+			});
+		</script>
+	</head>
+	
+	<body class="bodyLogin">
+		<div id="divLogin" class="containerLogin rounded">
+			<div class="containerLoading">
+				<div class="progressLoading"><div>logging onto Silver Bullet</div></div>
+			</div>
+			<div class="logoLogin"><img src="../Images/LogoImages/LogoSilverBullet.png" /><br/>agile management system</div>
+			<div class="containerTableLogin">
+				<table class="tableLogin">
+					<tr>
+						<td id="txtUserName" class="tdLoginLabel">user name / email:</td>
+						<td><input type="text" class="textLogin" /></td>
+						<td rowspan="2"><img src="../Images/MiscImages/ArrowLeft.gif" style="height:50px;" /></td>
+					</tr>
+					<tr>
+						<td class="tdLoginLabel">password:</td>
+						<td><input type="password" class="textLogin" /></td>
+					</tr>
+					<tr>
+						<td id="btnLogin" colspan="2" class="tdButton" style="background: transparent url('../Images/ButtonImages/ButtonLogin.png') no-repeat 100%;"><a href="#">log me into Silver Bullet</a></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="tdButton2" style="background: transparent url('../Images/ButtonImages/ButtonAdd.png') no-repeat 100%;"><a href="#">register a new Silver Bullet account</a></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="tdButton2" style="background: transparent url('../Images/ButtonImages/ButtonForgot.png') no-repeat 100%;"><a href="#">i forgot my Silver Bullet password</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
