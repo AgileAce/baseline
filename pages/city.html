@@ -33,7 +33,7 @@ function errorFunction(){
     geocoder.geocode({'latLng': latlng}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
       console.log(results);
-        if (results[1]) {
+        if (results[1]){
          //formatted address
          alert(results[0].formatted_address);
         //find country name
