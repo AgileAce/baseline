@@ -1,3 +1,3 @@
 <%
-	response.write "ERROR: " & err.Description
+	response.write err.Description
 %>
