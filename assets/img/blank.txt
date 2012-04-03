@@ -1,0 +1,1 @@
+This is just a blank text file, to ensure that the 'img' folder is created.
