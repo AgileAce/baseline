@@ -1,9 +1,9 @@
 <%
 '
 '	VBS JSON 2.0.3
-'	Copyright (c) 2009 Tuðrul Topuz
+'	Copyright (c) 2009 Tuï¿½rul Topuz
 '	Under the MIT (MIT-LICENSE.txt) license.
-'
+
 
 Const JSON_OBJECT	= 0
 Const JSON_ARRAY	= 1
