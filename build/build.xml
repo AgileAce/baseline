@@ -755,7 +755,7 @@
             <arg line="--preserve-multi-spaces"/>
             <arg line="--compress-js"/>
             <arg line="--compress-css"/>
-            <!--<arg line="--preserve-php"/>-->
+            <!--<arg line="preserve-php"/>-->
             <arg line="--preserve-ssi"/>
             <srcfile/>
             <arg value="-o"/>
@@ -777,7 +777,7 @@
             <arg line="--remove-quotes"/>
             <arg line="--compress-js"/>
             <arg line="--compress-css"/>
-            <!--<arg line="--preserve-php"/>-->
+            <!--<arg line="preserve-php"/>-->
             <arg line="--preserve-ssi"/>
             <srcfile/>
             <arg value="-o"/>
