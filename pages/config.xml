@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration>
+    <version>1.0</version>
+    <connection>
+        <databaseserver>.</databaseserver>
+        <databasename>SilverBullet</databasename>
+        <databaseuser>SBUser</databaseuser>
+        <databasepassword>sys101</databasepassword>
+    </connection>
+</configuration>
