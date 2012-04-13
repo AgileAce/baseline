@@ -1,4 +1,4 @@
 <%
-    ' This is a test 000
+    ' This is a test xxx
 	response.write "ERR: " & err.Description
 %>
