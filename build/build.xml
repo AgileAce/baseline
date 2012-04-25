@@ -395,6 +395,20 @@
   *************************************************
   -->
 
+<target name="qunit" description="runs QUnit tests using PhantomJS">
+<!-- QUnit Javascript Unit Tests -->
+
+<echo message="Executing QUnit Javascript Unit Tests..."/>
+
+	<apply executable="/usr/local/phantomjs/bin/phantomjs" >
+		<arg value="/Users/cas/Desktop/POC/baseline/build/tools/qunit-runner.js" />
+		<arg line="--qunit /Users/cas/Desktop/POC/baseline/test/qunit/qunit.js --tests /Users/cas/Desktop/POC/baseline/test --junit /Users/cas/Desktop/POC/baseline/test/qunit-results.xml" />
+		<fileset dir="${basedir}/${dir.test}" includes="tests.js" />
+		<srcfile/>
+	</apply>
+</target>
+
+ 
   <target name="-clean" description="(PRIVATE) Wipe the previous build (Deletes the dir.publish directory">
   <!-- This is a private target -->
       <echo message="Cleaning up previous build directory..."/>
