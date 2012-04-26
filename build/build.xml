@@ -400,6 +400,8 @@
 
 <echo message="Executing QUnit Javascript Unit Tests..."/>
 
+	<delete file="{basedir}/${dir.test}/qunit-results.xml" />
+
 	<apply executable="/usr/local/phantomjs/bin/phantomjs" >
 		<arg value="/Users/cas/Desktop/POC/baseline/build/tools/qunit-runner.js" />
 		<arg line="--qunit /Users/cas/Desktop/POC/baseline/test/qunit/qunit.js --tests /Users/cas/Desktop/POC/baseline/test --junit /Users/cas/Desktop/POC/baseline/test/qunit-results.xml" />
