@@ -1,4 +1,4 @@
 <%
-    ' This is a test 345
+    ' Simple error message
 	response.write "ERR: " & err.Description
 %>
