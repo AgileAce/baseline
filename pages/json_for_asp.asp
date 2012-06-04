@@ -3,6 +3,7 @@
 '	VBS JSON 2.0.3
 '	Copyright (c) 2009 Tu�rul Topuz
 '	Under the MIT (MIT-LICENSE.txt) license.
+'
 
 
 Const JSON_OBJECT	= 0
