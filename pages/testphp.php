@@ -1,5 +1,6 @@
 <?php
 
+	/* Testing Smart Commits again */
 	class customException extends Exception{
 		public function errorMessage(){
 			$errorMsg = "<b>".$this->getMessage()."</b><br/>"."Error on line ".$this->getLine()." in ".$this->getFile();
