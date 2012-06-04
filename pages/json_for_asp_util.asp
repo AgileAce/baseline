@@ -1,4 +1,7 @@
 <%
+
+' Just another test
+
 Function QueryToJSON(dbc, sql)
         Dim rs, jsa
         Set rs = dbc.Execute(sql)
