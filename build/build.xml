@@ -479,7 +479,8 @@
         </filelist>
         
         <!-- overwrite=no here means not to overwrite if the target is newer than the sources -->
-        <concat destfile="./${dir.intermediate}/${dir.js}/scripts-concat.min.js" overwrite="no">
+        <!-- <concat destfile="./${dir.intermediate}/${dir.js}/scripts-concat.min.js" overwrite="no"> -->
+        <concat destfile="./${dir.intermediate}/${dir.js}/scripts-concat.min.js">
             <filelist refid="scripts.toconcat"/>
         </concat>
     </target>
@@ -495,7 +496,8 @@
         <if>
             <available file="./${dir.intermediate}/${dir.js.modules}"/>
             <then>
-                <concat destfile="./${dir.intermediate}/${dir.js.modules}/_all.js" overwrite="no">
+                <!-- <concat destfile="./${dir.intermediate}/${dir.js.modules}/_all.js" overwrite="no"> -->
+                <concat destfile="./${dir.intermediate}/${dir.js.modules}/_all.js">
                     <fileset dir="./${dir.intermediate}/${dir.js.modules}/">
                         <include name="*.js"/>
                     </fileset>
