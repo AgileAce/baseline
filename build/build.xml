@@ -492,7 +492,6 @@
         
         <!-- cachebust modules directory name -->
         <!-- Concatinate only to generate checksum. Concatinated file not actually published. -->
-        <!-- -->
         <if>
             <available file="./${dir.intermediate}/${dir.js.modules}"/>
             <then>
