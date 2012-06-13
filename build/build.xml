@@ -26,7 +26,7 @@
     <fail message="All features of the build script require Ant version 1.8.2 or greater. Please upgrade to the latest version or remove all instances of 'overwrite=no' (and this fail task) from the build script to continue">
         <condition>
             <not>
-                <antversion atleast="1.8.0"/>
+                <antversion atleast="1.8.2"/>
             </not>
         </condition>
     </fail>
