@@ -7,6 +7,4 @@
         <databaseuser>SBUser</databaseuser>
         <databasepassword>sys101</databasepassword>
     </connection>
-    <nothing>
-    </nothing>
 </configuration>
